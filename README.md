@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 * Python >= 2.7 / Python >= 3.0
 * Python packages:
-	* (unidecode)[https://pypi.org/project/Unidecode/]
+	* (unidecode)[https://pypi.org/project/Unidecode/] to normalize strings
 
 You can install **unidecode** with pip:
 ```
@@ -21,11 +21,14 @@ pip install unidecode
 
 Installing crypyto is plain and simple.
 
+**Not working yet:**
+----------------------------------
 The easiest way is by using pip:
 
 ```
 pip install crypyto
 ```
+----------------------------------
 
 But you can also clone this repository using git
 
