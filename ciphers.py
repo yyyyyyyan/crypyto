@@ -44,6 +44,7 @@ class PolybiusSquare:
 
 	def encrypt(self, text):
 		text = unidecode(text).upper()
+		text = text.replace('J', 'I') if len(self.abc) == 25 else text
 		cipher = '{}x{}#'.format(self.width, self.height)
 		positions = [random.choice(self.abc_to_pos[letter]) for letter in text]
 		cipher += ';'.join(positions)
