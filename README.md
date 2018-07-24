@@ -57,7 +57,7 @@ Ciphers crypyto supports:
 >>> caesar.encrypt('Hello, world!')
 'MJQQT, BTWQI!'
 >>> caesar.decrypt('MJQQT, BTWQI!')
-HELLO, WORLD!
+'HELLO, WORLD!'
 >>> caesar.brute_force('MJQQT, BTWQI!')
 NKRRU, CUXRJ!
 OLSSV, DVYSK!
