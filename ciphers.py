@@ -61,3 +61,16 @@ class PolybiusSquare:
 			return text
 		else:
 			raise ValueError('Cipher doesn\'t match the Polybius Square pattern.')
+
+class Atbash:
+	def __init__(self, abc=string.ascii_uppercase):
+		self.abc = abc
+		self.cba = abc[::-1]
+		self.convertion_dict = dict(zip(self.abc, self.cba))
+
+	def encrypt(self, text, decode_unicode=True):
+		text = unidecode(text).upper() if decode_unicode else text.upper()
+		cipher = ''.join([self.convertion_dict.get(character, character) for character in text])
+		return cipher
+
+	decrypt = encrypt

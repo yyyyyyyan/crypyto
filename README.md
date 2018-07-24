@@ -32,14 +32,24 @@ Ciphers crypyto supports:
 
 ```python
 >>> from ciphers import PolybiusSquare
+>>> ps = PolybiusSquare(width=5, height=5)
 >>> ps.encrypt('EncryptedMessage')
 '5x5#5-1;3-3;3-1;2-4;4-5;5-3;4-4;5-1;4-1;2-3;5-1;3-4;3-4;1-1;2-2;5-1'
 >>> ps.decrypt('5x5#5-1;3-3;3-1;2-4;4-5;5-3;4-4;5-1;4-1;2-3;5-1;3-4;3-4;1-1;2-2;5-1')
 'ENCRYPTEDMESSAGE'
 ```
+* [Atbash](https://en.wikipedia.org/wiki/Atbash)
+
+```python
+>>> from ciphers import Atbash
+>>> atbash = Atbash()
+>>> atbash.encrypt('Hello, world!')
+'SVOOL, DLIOW!'
+>>> atbash.decrypt('SVOOL, DLIOW!')
+'HELLO, WORLD!'
+```
 
 Cipher crypyto will soon support:
-* ATBASH
 * CAESAR / ROT13
 * AFFINE
 * RAIL FENCE
