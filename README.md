@@ -19,18 +19,7 @@ pip install unidecode
 
 ### Installing
 
-Installing crypyto is plain and simple.
-
-**Not working yet:**
-----------------------------------
-The easiest way is by using pip:
-
-```
-pip install crypyto
-```
-----------------------------------
-
-But you can also clone this repository using git
+For now, you can clone this repository using git
 
 ```
 git clone https://github.com/yanorestes/crypyto.git
@@ -38,17 +27,43 @@ git clone https://github.com/yanorestes/crypyto.git
 
 ## Usage
 
-nothing for now
+Ciphers crypyto supports:
+* [Polybius Square](https://en.wikipedia.org/wiki/Polybius_square)
 
-## Versioning
+```python
+>>> from ciphers import PolybiusSquare
+>>> ps.encrypt('EncryptedMessage')
+'5x5#5-1;3-3;3-1;2-4;4-5;5-3;4-4;5-1;4-1;2-3;5-1;3-4;3-4;1-1;2-2;5-1'
+>>> ps.decrypt('5x5#5-1;3-3;3-1;2-4;4-5;5-3;4-4;5-1;4-1;2-3;5-1;3-4;3-4;1-1;2-2;5-1')
+'ENCRYPTEDMESSAGE'
+```
 
-We use git for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Cipher crypyto will soon support:
+* ATBASH
+* CAESAR / ROT13
+* AFFINE
+* RAIL FENCE
+* KEYWORD
+* BEAUFORT
+* TEMPLAR
+* PORTA
+* VIGENERE
+* GRONSFELD
+* AUTOKEY
+* BACON
+* CHAOCIPHER
+* ADFGVX
+* PLAYFAIR
+* FOUR-SQUARE
+* ONE-TIME PAD
+* BIFID
+* HILL CIPHER
+* ENIGMA
 
 ## Authors
 
 * **Yan Orestes** - *Initial work* - [yanorestes](https://github.com/yanorestes)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
