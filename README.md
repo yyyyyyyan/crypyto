@@ -49,8 +49,35 @@ Ciphers crypyto supports:
 'HELLO, WORLD!'
 ```
 
+* [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher)
+
+```python
+>>> from ciphers import Caesar
+>>> caesar = Caesar(key=5)
+>>> caesar.encrypt('Hello, world!')
+'MJQQT, BTWQI!'
+>>> caesar.decrypt('MJQQT, BTWQI!')
+HELLO, WORLD!
+>>> caesar.brute_force('MJQQT, BTWQI!')
+NKRRU, CUXRJ!
+OLSSV, DVYSK!
+...
+HELLO, WORLD!
+IFMMP, XPSME!
+...
+```
+
+* [ROT13](https://en.wikipedia.org/wiki/ROT13)
+
+```python
+>>> from ciphers import ROT13
+>>> ROT13.encrypt('Hello, world!')
+'URYYB, JBEYQ!'
+>>> ROT13.encrypt('URYYB, JBEYQ!')
+'HELLO, WORLD!'
+```
+
 Cipher crypyto will soon support:
-* CAESAR / ROT13
 * AFFINE
 * RAIL FENCE
 * KEYWORD

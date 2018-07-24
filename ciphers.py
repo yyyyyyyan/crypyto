@@ -74,3 +74,39 @@ class Atbash:
 		return cipher
 
 	decrypt = encrypt
+
+class Caesar:
+	def __init__(self, abc=string.ascii_uppercase, key=1):
+		self.abc = abc
+		self.max_value = len(abc) - 1
+		self.key = abs(key)
+		self.caesar_dict = dict(enumerate(abc, 1))
+
+	def encrypt(self, text, decode_unicode=True, key=0):
+		key = key if key else self.key
+		text = unidecode(text).upper() if decode_unicode else text.upper()
+		cipher = ''
+		for letter in text:
+			if letter in self.abc:
+				letter_index = self.abc.index(letter) + key
+				if letter_index > self.max_value:
+					letter_index = letter_index - self.max_value - 1
+				if letter_index < 0:
+					letter_index = letter_index + self.max_value + 1
+
+				cipher += self.abc[letter_index]
+			else:
+				cipher += letter
+		return cipher
+
+	def decrypt(self, cipher, decode_unicode=True, key=0):
+		key = key if key else self.key
+		text = self.encrypt(cipher, decode_unicode, -key)
+		return text
+
+	def brute_force(self, cipher, decode_unicode=True):
+		for try_number in range(1, self.max_value + 1):
+			text = self.encrypt(cipher, decode_unicode, try_number)
+			print(text)
+
+ROT13 = Caesar(key=13)
