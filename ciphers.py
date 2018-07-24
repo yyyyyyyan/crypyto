@@ -1,3 +1,4 @@
+import string
 import re
 import random
 from unidecode import unidecode
@@ -16,7 +17,7 @@ class PolybiusSquare:
 		self.width = width if width else int(match.group(1))
 		self.height = height if height else int(match.group(2))
 
-		self.abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+		self.abc = string.ascii_uppercase
 		self.abc = self.abc.replace('J', '') if ij else self.abc
 
 		if width * height < len(self.abc):
