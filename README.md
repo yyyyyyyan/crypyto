@@ -77,6 +77,17 @@ IFMMP, XPSME!
 'HELLO, WORLD!'
 ```
 
+* [Morse code](https://en.wikipedia.org/wiki/Morse_code)
+
+```python
+>>> from cipher import Morse
+>>> mc = Morse()
+>>> mc.encrypt('Hello, world!')
+'.... . .-.. .-.. --- --..-- / .-- --- .-. .-.. -.. -.-.--'
+>>> mc.decrypt('.... . .-.. .-.. --- --..-- / .-- --- .-. .-.. -.. -.-.--')
+'HELLO, WORLD!'
+```
+
 Cipher crypyto will soon support:
 * AFFINE
 * RAIL FENCE
