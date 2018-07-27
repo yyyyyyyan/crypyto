@@ -1,6 +1,7 @@
 import string
 import re
 import random
+from math import gdc
 from unidecode import unidecode
 
 class PolybiusSquare:
@@ -185,3 +186,27 @@ class Morse:
             text += ''.join([self.morse_to_char.get(character, '�') for character in word.split()])
             text += ' '
         return text.strip()
+
+class Affine:
+    def __init__(self, a, b, abc=string.ascii_uppercase):
+        if gdc(a, len(abc)) != 1:
+            raise ValueError('Parameter a must be coprime to {}'.format(len(abc)))
+        self.a = a
+        self.b = b
+        self.abc = abc
+        self.pos_to_abc = dict(enumerate(abc))
+        self.abc_to_pos = {v:k for k, v in self.pos_to_abc.items()}
+
+    def encrypt(self, text):
+        text = unidecode(text).upper()
+        cipher = ''
+        for character in text:
+            if character in self.abc:
+                x = self.abc_to_pos[character]
+                cipher_pos = (self.a * x + self.b) % len(self.abc)
+                character = self.pos_to_abc[cipher_pos]
+            cipher += character
+        return cipher
+
+    def decrypt(self, cipher):
+        pass
