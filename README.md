@@ -28,7 +28,13 @@ git clone https://github.com/yanorestes/crypyto.git
 ## Usage
 
 Ciphers crypyto supports:
-* [Polybius Square](https://en.wikipedia.org/wiki/Polybius_square)
+- [x] [Polybius Square](#polybius-square)
+- [x] [Atbash](#atbash)
+- [x] [Caesar Cipher](#caesar-cipher)
+- [x] [ROT13](#rot13)
+- [x] [Morse Code](#morse-code)
+
+<h3 id="polybius-square"><a href="https://en.wikipedia.org/wiki/Polybius_square">Polybius Square</a></h3>
 
 ```python
 >>> from ciphers import PolybiusSquare
@@ -38,7 +44,8 @@ Ciphers crypyto supports:
 >>> ps.decrypt('5x5#5-1;3-3;3-1;2-4;4-5;5-3;4-4;5-1;4-1;2-3;5-1;3-4;3-4;1-1;2-2;5-1')
 'ENCRYPTEDMESSAGE'
 ```
-* [Atbash](https://en.wikipedia.org/wiki/Atbash)
+
+<h3 id="atbash"><a href="https://en.wikipedia.org/wiki/Atbash">Atbash</a></h3>
 
 ```python
 >>> from ciphers import Atbash
@@ -49,7 +56,7 @@ Ciphers crypyto supports:
 'HELLO, WORLD!'
 ```
 
-* [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher)
+<h3 id="caesar-cipher"><a href="https://en.wikipedia.org/wiki/Caesar_cipher">Caesar Cipher</a></h3>
 
 ```python
 >>> from ciphers import Caesar
@@ -67,7 +74,7 @@ IFMMP, XPSME!
 ...
 ```
 
-* [ROT13](https://en.wikipedia.org/wiki/ROT13)
+<h3 id="rot13"><a href="https://en.wikipedia.org/wiki/ROT13">ROT13</a></h3>
 
 ```python
 >>> from ciphers import ROT13
@@ -77,7 +84,7 @@ IFMMP, XPSME!
 'HELLO, WORLD!'
 ```
 
-* [Morse code](https://en.wikipedia.org/wiki/Morse_code)
+<h3 id="morse-code"><a href="https://en.wikipedia.org/wiki/Morse_code">Morse Code</a></h3>
 
 ```python
 >>> from cipher import Morse
@@ -88,25 +95,29 @@ IFMMP, XPSME!
 'HELLO, WORLD!'
 ```
 
-Cipher crypyto will soon support:
-* AFFINE
-* RAIL FENCE
-* KEYWORD
-* BEAUFORT
-* TEMPLAR
-* PORTA
-* VIGENERE
-* GRONSFELD
-* AUTOKEY
-* BACON
-* CHAOCIPHER
-* ADFGVX
-* PLAYFAIR
-* FOUR-SQUARE
-* ONE-TIME PAD
-* BIFID
-* HILL CIPHER
-* ENIGMA
+TODO Ciphers:
+- [ ] AFFINE
+- [ ] RAIL FENCE
+- [ ] KEYWORD
+- [ ] BEAUFORT
+- [ ] TEMPLAR
+- [ ] PORTA
+- [ ] VIGENERE
+- [ ] GRONSFELD
+- [ ] AUTOKEY
+- [ ] BACON
+- [ ] CHAOCIPHER
+- [ ] ADFGVX
+- [ ] PLAYFAIR
+- [ ] FOUR-SQUARE
+- [ ] ONE-TIME PAD
+- [ ] BIFID
+- [ ] HILL CIPHER
+- [ ] ENIGMA
+
+TODO Features:
+- [ ] Cipher identifier
+- [ ] Auto decoder
 
 ## Authors
 
