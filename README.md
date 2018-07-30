@@ -33,6 +33,7 @@ Ciphers crypyto supports:
 - [x] [Caesar Cipher](#caesar-cipher)
 - [x] [ROT13](#rot13)
 - [x] [Morse Code](#morse-code)
+- [x] [Affine Cipher](#affine-cipher)
 
 <h3 id="polybius-square"><a href="https://en.wikipedia.org/wiki/Polybius_square">Polybius Square</a></h3>
 
@@ -92,6 +93,17 @@ IFMMP, XPSME!
 >>> mc.encrypt('Hello, world!')
 '.... . .-.. .-.. --- --..-- / .-- --- .-. .-.. -.. -.-.--'
 >>> mc.decrypt('.... . .-.. .-.. --- --..-- / .-- --- .-. .-.. -.. -.-.--')
+'HELLO, WORLD!'
+```
+
+<h3 id="affine-cipher"><a href="https://en.wikipedia.org/wiki/Affine_cipher">Affine Cipher</a></h3>
+
+```python
+>>> from cipher import Affine
+>>> af = Affine(5, 8)
+>>> af.encrypt('Hello, world!')
+'RCLLA, OAPLX!'
+>>> af.decrypt('RCLLA, OAPLX!')
 'HELLO, WORLD!'
 ```
 

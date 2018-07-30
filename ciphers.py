@@ -1,7 +1,7 @@
 import string
 import re
 import random
-from math import gdc
+from math import gcd
 from unidecode import unidecode
 
 class PolybiusSquare:
@@ -189,7 +189,7 @@ class Morse:
 
 class Affine:
     def __init__(self, a, b, abc=string.ascii_uppercase):
-        if gdc(a, len(abc)) != 1:
+        if gcd(a, len(abc)) != 1:
             raise ValueError('Parameter a must be coprime to {}'.format(len(abc)))
         self.a = a
         self.b = b
@@ -209,4 +209,13 @@ class Affine:
         return cipher
 
     def decrypt(self, cipher):
-        pass
+        cipher = cipher.upper()
+        text = ''
+        for character in cipher:
+            if character in self.abc:
+                mod_inv = -self.a % len(self.abc)
+                cipher_pos = self.abc_to_pos[character]
+                x = mod_inv * (cipher_pos - self.b) % 26
+                character = self.pos_to_abc[x]
+            text += character
+        return text
