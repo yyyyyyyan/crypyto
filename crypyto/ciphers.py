@@ -144,3 +144,28 @@ class Affine:
                 character = self.pos_to_abc[x]
             text += character
         return text
+
+class RailFence:
+    def __init__(self, n_rails, only_alnum=False, direction='D'):
+        if direction not in ['D','U']:
+            raise ValueError('direction must be (U)p or (D)own')
+
+        self.n_rails = n_rails
+        self.only_alnum = only_alnum
+        self.not_alnum_pattern = re.compile(r'[\W_]+', re.UNICODE)
+        self.direction = direction
+
+    def encrypt(self, text):
+        text = self.not_alnum_pattern.sub('', text) if self.only_alnum else text
+        rails = [''] * self.n_rails
+        direction = self.direction
+        rail_index = 0 if direction == 'D' else self.n_rails - 1
+        for character in text:
+            rails[rail_index] += character
+            if rail_index == 0:
+                direction = 'U'
+            elif rail_index == self.n_rails - 1:
+                direction = 'D'
+            rail_index = rail_index + 1 if direction == 'U' else rail_index - 1
+        cipher = ''.join(rails)
+        return cipher
