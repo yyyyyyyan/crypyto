@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 * Python >= 2.7 / Python >= 3.4
 * Python packages (no need to worry if you use pip to install crypyto):
-	* (unidecode)[https://pypi.org/project/Unidecode/] to normalize strings
+	* [unidecode](https://pypi.org/project/Unidecode/) to normalize strings
 
 ### Installing
 
