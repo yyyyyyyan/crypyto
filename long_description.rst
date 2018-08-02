@@ -43,10 +43,10 @@ Ciphers crypyto supports:
 -  Caesar Cipher
 -  ROT13
 -  Affine Cipher
+-  Rail Fence Cipher
 
 TODO Ciphers:
 
--  RAIL FENCE
 -  KEYWORD
 -  BEAUFORT
 -  PORTA

@@ -34,6 +34,7 @@ Ciphers crypyto supports:
 - [x] [Caesar Cipher](#caesar-cipher)
 - [x] [ROT13](#rot13)
 - [x] [Affine Cipher](#affine-cipher)
+- [x] [Rail Fence Cipher](#rail-fence-cipher)
 
 <h3 id="polybius-square"><a href="https://en.wikipedia.org/wiki/Polybius_square">Polybius Square</a></h3>
 
@@ -95,8 +96,28 @@ IFMMP, XPSME!
 >>> af.decrypt('RCLLA, OAPLX!')
 'HELLO, WORLD!'
 ```
+
+<h3 id="rail-fence-cipher"><a href="https://en.wikipedia.org/wiki/Rail_fence_cipher">Rail Fence Cipher</a></h3>
+
+```python
+>>> from crypyto.cipher import RailFence
+>>> rf = RailFence(n_rails=3, only_alnum=True)
+>>> rf.encrypt('WE ARE DISCOVERED. FLEE AT ONCE')
+'WECRLTEERDSOEEFEAOCAIVDEN'
+>>> rf.decrypt('WECRLTEERDSOEEFEAOCAIVDEN')
+'WE ARE DISCOVERED. FLEE AT ONCE'
+>>> rf.brute_force('WECRLTEERDSOEEFEAOCAIVDEN')
+There are 46 possible results. You can specify an output file in the parameter output_file
+Are you sure you want to print them all (Y/N)?
+Y
+WEEFCERALOTCEAEIRVDDSEONE
+WEAREDISCOVEREDFLEEATONCE
+...
+NEDVIACOAEFEEOSDREETREWCL
+NEDVIACOAEFEEOSDREETLREWC
+```
+
 TODO Ciphers:
-- [ ] RAIL FENCE
 - [ ] KEYWORD
 - [ ] BEAUFORT
 - [ ] PORTA

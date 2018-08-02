@@ -161,26 +161,95 @@ class RailFence:
         self.direction = direction
 
     @property
+    def n_rails(self):
+        return self._n_rails
+
+    @n_rails.setter
+    def n_rails(self, value):
+        self._n_rails = abs(value) if abs(value) > 1 else 2
+        self.cycle = self.n_rails * 2 - 2
+
+    @property
+    def cycle(self):
+        return self._cycle
+    
+    @cycle.setter
+    def cycle(self, value):
+        if value != self.n_rails * 2 - 2:
+            raise ValueError('Cycle number is automatically calculated')
+        self._cycle = value
+
+    @property
     def direction(self):
         return self._direction
     
     @direction.setter
     def direction(self, value):
-        if value not in ['D', 'U']:
+        if value[0].upper() not in ['D', 'U']:
             raise ValueError('direction must be (U)p or (D)own')
-        self._direction = value
-
-    def encrypt(self, text):
-        text = self.not_alnum_pattern.sub('', text) if self.only_alnum else text
-        rails = [''] * self.n_rails
+        self._direction = value[0].upper()
+    
+    def _zig_zag_for(self, iterate_over, action):
         direction = self.direction
         rail_index = 0 if direction == 'D' else self.n_rails - 1
-        for character in text:
-            rails[rail_index] += character
+        for n in iterate_over:
+            action(rail_index, n)
             if rail_index == 0:
                 direction = 'U'
             elif rail_index == self.n_rails - 1:
                 direction = 'D'
             rail_index = rail_index + 1 if direction == 'U' else rail_index - 1
+
+    def encrypt(self, text):
+        text = self.not_alnum_pattern.sub('', text) if self.only_alnum else text
+        rails = [''] * self.n_rails
+        def add_char(rail_index, *params):
+            nonlocal rails
+            rails[rail_index] += params[0]
+        self._zig_zag_for(text, add_char)
         cipher = ''.join(rails)
         return cipher
+
+    def decrypt(self, cipher):
+        base_width, n_extra = divmod(len(cipher), self.cycle)
+        n_characters_rails = [base_width * 2 if 0 < n_rail < self.n_rails - 1 else base_width for n_rail in range(self.n_rails)] 
+        def add_n_characters(rail_index, *trash):
+            nonlocal n_characters_rails
+            n_characters_rails[rail_index] += 1
+        self._zig_zag_for(range(n_extra), add_n_characters)
+        rails = [[] for n in range(self.n_rails)]
+
+        cipher_index = 0
+        for rail_index, n_characters in enumerate(n_characters_rails):
+            rails[rail_index].extend(list(cipher[cipher_index:cipher_index + n_characters]))
+            cipher_index += n_characters
+
+        text = ''
+        def add_decrypted_char(rail_index, *trash):
+            nonlocal text
+            text += rails[rail_index].pop(0)
+        self._zig_zag_for(range(len(cipher)), add_decrypted_char)
+        return text
+
+    def brute_force(self, cipher, output_file=None):
+        n_possibilities = len(cipher) * 2 - 4
+        if n_possibilities > 20 and not output_file:
+            print('There are {} possible results. You can specify an output file in the parameter output_file'.format(n_possibilities))
+            print('Are you sure you want to print them all (Y/N)?')
+            if not input().upper().startswith('Y'):
+                return
+        initial_direction = self.direction
+        results = ''
+        for direction in ['D', 'U']:
+            self.direction = direction
+            initial_n_rails = self.n_rails
+            for n in range(2, len(cipher)):
+                self.n_rails = n
+                results += self.decrypt(cipher) + '\n'
+            self.n_rails = initial_n_rails
+        self.direction = initial_direction
+        if output_file:
+            with open(output_file, 'w') as out:
+                out.write(results.strip())
+        else:
+            print(results.strip())
