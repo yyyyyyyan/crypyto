@@ -5,14 +5,14 @@ with open('long_description.rst') as file:
 
 setup(
     name='crypyto',
-    version='0.1.0',
+    version='0.1.1',
     author='Yan Orestes',
     author_email='yan.orestes@alura.com.br',
     packages=['crypyto'],
     description='crypyto is a Python package that provides simple usage of cryptography tools and ciphers on your programs.',
     long_description=long_description,
     url='https://github.com/yanorestes/crypyto',
-    download_url='https://github.com/yanorestes/crypyto/archive/0.1.0.zip',
+    download_url='https://github.com/yanorestes/crypyto/archive/0.1.1.zip',
     license='MIT',
     keywords='crypto cryptography cipher',
     classifiers=[
