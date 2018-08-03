@@ -158,7 +158,8 @@ Substitution Alphabets crypyto supports:
 ```
 
 **templar_hello.png**:
-![Encrypted hello world](examples/templar_hello.png)
+
+![Encrypted hello world](https://raw.githubusercontent.com/yanorestes/crypyto/master/templar_hello.png)
 
 You can also set a limit for letters in line:
 
@@ -168,7 +169,8 @@ You can also set a limit for letters in line:
 ```
 
 **templar_hello_max.png**:
-![Encrypted hello world](examples/templar_hello_max.png)
+
+![Encrypted hello world](https://raw.githubusercontent.com/yanorestes/crypyto/master/templar_hello_max.png)
 
 TODO Substitution Alphabets:
 - [ ] Binary
