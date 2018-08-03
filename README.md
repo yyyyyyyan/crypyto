@@ -11,6 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 * Python >= 2.7 / Python >= 3.4
 * Python packages (no need to worry if you use pip to install crypyto):
 	* [unidecode](https://pypi.org/project/Unidecode/) to normalize strings
+	* [Pillow](https://pypi.org/project/Pillow/) to handle images
 
 ### Installing
 
@@ -136,6 +137,7 @@ TODO Ciphers:
 
 Substitution Alphabets crypyto supports:
 - [x] [Morse Code](#morse-code)
+- [x] [Templar Cipher](#templar-cipher)
 
 <h3 id="morse-code"><a href="https://en.wikipedia.org/wiki/Morse_code">Morse Code</a></h3>
 
@@ -148,8 +150,27 @@ Substitution Alphabets crypyto supports:
 'HELLO, WORLD!'
 ```
 
+<h3 id="templar-cipher"><a href="https://en.wikipedia.org/wiki/Pigpen_cipher#Variants">Templar Cipher</a></h3>
+
+```python
+>>> from crypyto.substitution_alphabets import Templar
+>>> Templar.encrypt('Hello, world!', 'templar_hello.png')
+```
+
+**templar_hello.png**:
+![Encrypted hello world](examples/templar_hello.png)
+
+You can also set a limit for letters in line:
+
+```python
+>>> from crypyto.substitution_alphabets import Templar
+>>> Templar.encrypt('Hello, world!', 'templar_hello_max.png', 5)
+```
+
+**templar_hello_max.png**:
+![Encrypted hello world](examples/templar_hello_max.png)
+
 TODO Substitution Alphabets:
-- [ ] Templar
 - [ ] Binary
 - [ ] Hexadecimal
 - [ ] Octal
