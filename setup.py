@@ -1,18 +1,18 @@
 from setuptools import setup
 
-with open('long_description.rst') as file:
+with open('README.rst') as file:
     long_description = file.read()
 
 setup(
     name='crypyto',
-    version='0.2.0',
+    version='0.2.1',
     author='Yan Orestes',
     author_email='yan.orestes@alura.com.br',
     packages=['crypyto'],
     description='crypyto is a Python package that provides simple usage of cryptography tools and ciphers on your programs.',
     long_description=long_description,
     url='https://github.com/yanorestes/crypyto',
-    download_url='https://github.com/yanorestes/crypyto/archive/0.2.0.zip',
+    download_url='https://github.com/yanorestes/crypyto/archive/0.2.1.zip',
     license='MIT',
     keywords='crypto cryptography cipher',
     classifiers=[
@@ -24,7 +24,6 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',

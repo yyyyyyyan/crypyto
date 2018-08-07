@@ -13,10 +13,11 @@ your local machine for development and testing purposes.
 Dependencies
 ~~~~~~~~~~~~
 
--  Python >= 2.7 / Python >= 3.4
+-  Python >= 3.5
 -  Python packages (no need to worry if you use pip to install crypyto):
 
    -  `unidecode`_ to normalize strings
+   -  `Pillow`_ to handle images
 
 Installing
 ~~~~~~~~~~
@@ -38,12 +39,12 @@ Usage
 
 Ciphers crypyto supports:
 
--  Polybius Square
--  Atbash
--  Caesar Cipher
--  ROT13
--  Affine Cipher
--  Rail Fence Cipher
+-  `Polybius Square`_
+-  `Atbash`_
+-  `Caesar Cipher`_
+-  `ROT13`_
+-  `Affine Cipher`_
+-  `Rail Fence Cipher`_
 
 TODO Ciphers:
 
@@ -65,11 +66,16 @@ TODO Ciphers:
 
 Substitution Alphabets crypyto supports:
 
--  Morse Code
+-  `Morse Code`_ 
+-  `Templar Cipher`_
 
 TODO Substitution Alphabets:
 
--  Templar
+-  Pigpen
+-  ASL
+-  BSL
+-  Maze
+-  Flag semaphore
 -  Binary
 -  Hexadecimal
 -  Octal
@@ -95,5 +101,14 @@ This project is licensed under the MIT License - see the `LICENSE`_ file
 for details
 
 .. _unidecode: https://pypi.org/project/Unidecode/
+.. _Pillow: https://pypi.org/project/Pillow/
+.. _Polybius Square: https://en.wikipedia.org/wiki/Polybius_square
+.. _Atbash: https://en.wikipedia.org/wiki/Atbash
+.. _Caesar Cipher: https://en.wikipedia.org/wiki/Caesar_cipher
+.. _ROT13: https://en.wikipedia.org/wiki/ROT13
+.. _Affine Cipher: https://en.wikipedia.org/wiki/Affine_cipher
+.. _Rail Fence Cipher: https://en.wikipedia.org/wiki/Rail_fence_cipher
+.. _Morse Code: https://en.wikipedia.org/wiki/Morse_code
+.. _Templar Cipher: https://en.wikipedia.org/wiki/Pigpen_cipher#Variants
 .. _yanorestes: https://github.com/yanorestes
 .. _LICENSE: https://github.com/yanorestes/crypyto/blob/master/LICENSE.txt
