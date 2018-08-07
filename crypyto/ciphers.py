@@ -29,6 +29,7 @@ class PolybiusSquare:
         self.width = width
         self.height = height
         self.mount_square()
+        self.not_abc_pattern = re.compile('[^{}]+'.format(abc), re.UNICODE)
 
     @property
     def width(self):
@@ -64,7 +65,6 @@ class PolybiusSquare:
         for letter in self.abc:
             for pos in self.abc_to_pos[letter]:
                 self.pos_to_abc[pos] = letter
-        self.pos_to_abc['0-0'] = '�'
 
     def encrypt(self, text):
         """
@@ -82,8 +82,9 @@ class PolybiusSquare:
 
         text = unidecode(text).upper()
         text = text.replace('J', 'I') if len(self.abc) == 25 else text
+        text = self.not_abc_pattern.sub('', text)
         cipher = '{}x{}#'.format(self.width, self.height)
-        positions = [random.choice(self.abc_to_pos.get(letter, ['0-0'])) for letter in text]
+        positions = [random.choice(self.abc_to_pos[letter]) for letter in text]
         cipher += ';'.join(positions)
         return cipher
 
@@ -108,7 +109,7 @@ class PolybiusSquare:
         match = re.search(r'(?:\d+x\d+#)?((?:\d+-\d+;?)+)', cipher)
         if match:
             positions = match.group(1).split(';')
-            text = ''.join([self.pos_to_abc.get(pos, '0-0') for pos in positions])
+            text = ''.join([self.pos_to_abc[pos] for pos in positions])
             return text
         else:
             raise ValueError('Cipher doesn\'t match the Polybius Square pattern.')
