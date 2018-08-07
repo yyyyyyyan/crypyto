@@ -106,7 +106,7 @@ IFMMP, XPSME!
 >>> rf.encrypt('WE ARE DISCOVERED. FLEE AT ONCE')
 'WECRLTEERDSOEEFEAOCAIVDEN'
 >>> rf.decrypt('WECRLTEERDSOEEFEAOCAIVDEN')
-'WE ARE DISCOVERED. FLEE AT ONCE'
+'WEAREDISCOVEREDFLEEATONCE'
 >>> rf.brute_force('WECRLTEERDSOEEFEAOCAIVDEN')
 There are 46 possible results. You can specify an output file in the parameter output_file
 Are you sure you want to print them all (Y/N)?
