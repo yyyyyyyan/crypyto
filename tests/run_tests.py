@@ -19,4 +19,4 @@ for cipher in ciphers:
 		encrypted_outputs = output.read().split('\n')
 	for input_text, encrypted_text in zip(input_strings, encrypted_outputs):
 		assert ciphers[cipher].encrypt(input_text) == encrypted_text
-		assert input_text = ciphers[cipher].decrypt(encrypted_text)
+		assert input_text == ciphers[cipher].decrypt(encrypted_text)
