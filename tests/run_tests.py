@@ -3,15 +3,15 @@ from crypyto.ciphers import *
 from crypyto.substitution_alphabets import *
 
 ciphers = {
-	'PolybiusSquare.out':PolybiusSquare(5, 5),
-	'Atbash.out':Atbash(),
-	'Caesar.out':Caesar(key=7),
-	'Affine.out':Affine(5, 8),
-	'RailFence.out':RailFence(3),
-	'Morse.out':Morse()
+	'tests/PolybiusSquare.out':PolybiusSquare(5, 5),
+	'tests/Atbash.out':Atbash(),
+	'tests/Caesar.out':Caesar(key=7),
+	'tests/Affine.out':Affine(5, 8),
+	'tests/RailFence.out':RailFence(3),
+	'tests/Morse.out':Morse()
 	}
 
-with open('input.in', 'r') as input_file:
+with open('tests/input.in', 'r') as input_file:
 	input_strings = input_file.read().split('\n')
 
 for cipher in ciphers:
