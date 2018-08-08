@@ -1,8 +1,10 @@
-crypyto
-=======
+`crypyto`_
+==========
 
 crypyto [*kri*-**pahy**-*toh*] is a Python package that provides simple
 usage of cryptography tools and ciphers on your programs.
+
+Check the `complete docs`_!
 
 Getting Started
 ---------------
@@ -100,6 +102,8 @@ License
 This project is licensed under the MIT License - see the `LICENSE`_ file
 for details
 
+.. _crypyto: https://crypyto.readthedocs.io/en/latest/
+.. _complete docs: https://crypyto.readthedocs.io/en/latest/
 .. _unidecode: https://pypi.org/project/Unidecode/
 .. _Pillow: https://pypi.org/project/Pillow/
 .. _Polybius Square: https://en.wikipedia.org/wiki/Polybius_square
