@@ -1,7 +1,7 @@
 """
 This module provides simple usage of functions related to substitutions alphabets
 """
-
+import os
 import re
 import string
 from math import ceil
@@ -129,7 +129,8 @@ class ImageSubstitution:
     def __init__(self, abc, directory, extension):
         self.abc = abc.upper()
         self.not_abc_pattern = re.compile('[^{}]+'.format(abc), re.UNICODE)
-        self.filename = 'static/{}/'.format(directory) + '{}' + '.{}'.format(extension)
+        base_dir = os.path.dirname(os.path.realpath(__file__))
+        self.filename = '{}/static/{}/'.format(base_dir, directory) + '{}' + '.{}'.format(extension)
 
     def encrypt(self, text, filename='output.png', max_in_line=30):
         """
