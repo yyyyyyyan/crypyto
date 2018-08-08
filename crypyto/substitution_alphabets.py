@@ -162,3 +162,4 @@ class ImageSubstitution:
         new_img.save(filename)
 
 Templar = ImageSubstitution(string.ascii_uppercase, 'Templar', 'png')
+Pigpen = ImageSubstitution(string.ascii_uppercase, 'Pigpen', 'png')
