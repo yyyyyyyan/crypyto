@@ -95,7 +95,7 @@ class PolybiusSquare:
         Args:
             cipher (str): The cipher to be decrypted. May or may not contain the square size at the beggining (e.g. '5x5#')
 
-        Raise:
+        Raises:
             ValueError: When ``cipher`` doesn't match the Polybius Square pattern
 
         Examples:
@@ -299,7 +299,7 @@ class Affine:
         b (int): Value of ``b``
         abc (str): The alphabet used in the cipher. Defaults to ``string.ascii_uppercase``
 
-    Raise:
+    Raises:
         ValueError: If ``a`` is not coprime to ``len(abc)``
     """
 
@@ -378,7 +378,7 @@ class RailFence:
         only_alnum (bool): Whether the manipulator will only encrypt alphanumerical characters. Defaults to ``False``
         direction (str): Default direction to start zigzagging. Must be ``'D'`` (Downwards) or ``'U'`` (Upwards). Defaults to ``'D'``
     
-    Raise:
+    Raises:
         ValueError: When ``direction`` doesn't start with ``'U'`` or ``'D'``
     """
 
