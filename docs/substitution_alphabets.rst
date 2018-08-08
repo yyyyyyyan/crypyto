@@ -24,7 +24,7 @@ Image Substitution
    .. autoclass:: ImageSubstitution
       :members:
 
-.._pigpen-cipher:
+.. _pigpen-cipher:
 
 `Pigpen Cipher`_
 ~~~~~~~~~~~~~~~~
