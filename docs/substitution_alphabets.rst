@@ -27,7 +27,7 @@ Image Substitution
 
 `Templar Cipher`_
 ~~~~~~~~~~~~~~~~~
-   `Templar` represents an ``ImageSubstitution`` object adjusted for the Templar Cipher
+   `Templar` represents an ``ImageSubstitution`` object adjusted to the Templar Cipher
 
    Examples:
 

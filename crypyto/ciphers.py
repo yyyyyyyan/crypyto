@@ -295,9 +295,12 @@ class Affine:
     `Affine` represents an Affine cipher manipulator
 
     Args:
-        a (int): Value of ``a``. Must be coprime to ``len(self.abc)``
+        a (int): Value of ``a``. Must be coprime to ``len(abc)``
         b (int): Value of ``b``
         abc (str): The alphabet used in the cipher. Defaults to ``string.ascii_uppercase``
+
+    Raise:
+        ValueError: If ``a`` is not coprime to ``len(abc)``
     """
 
     def __init__(self, a, b, abc=string.ascii_uppercase):
@@ -374,6 +377,9 @@ class RailFence:
         n_rails (int): Number of rails
         only_alnum (bool): Whether the manipulator will only encrypt alphanumerical characters. Defaults to ``False``
         direction (str): Default direction to start zigzagging. Must be ``'D'`` (Downwards) or ``'U'`` (Upwards). Defaults to ``'D'``
+    
+    Raise:
+        ValueError: When ``direction`` doesn't start with ``'U'`` or ``'D'``
     """
 
     def __init__(self, n_rails, only_alnum=False, direction='D'):
