@@ -134,7 +134,7 @@ class Atbash:
 
         Args:
             text (str): The text to be encrypted
-            decode_unicode (bool): Whether the text should have unicode characters converted to ascii before encrypting. Defautls to ``True``
+            decode_unicode (bool): Whether the text should have unicode characters converted to ascii before encrypting. Defaults to ``True``
         
         Examples:
             >>> from crypyto.ciphers import Atbash
@@ -153,7 +153,7 @@ class Atbash:
 
         Args:
             cipher (str): The cipher to be decrypted
-            decode_unicode (bool): Whether the cipher should have unicode characters converted to ascii before decrypting. Defautls to ``True``
+            decode_unicode (bool): Whether the cipher should have unicode characters converted to ascii before decrypting. Defaults to ``True``
         
         Examples:
             >>> from crypyto.ciphers import Atbash
@@ -204,7 +204,7 @@ class Caesar:
 
         Args:
             text (str): The text to be encrypted
-            decode_unicode (bool): Whether the text should have unicode characters converted to ascii before encrypting. Defautls to ``True``
+            decode_unicode (bool): Whether the text should have unicode characters converted to ascii before encrypting. Defaults to ``True``
             key (int|None): The key used to encrypt. Defaults to ``None``, which uses the value from ``self.key``
 
         Examples:
@@ -236,7 +236,7 @@ class Caesar:
 
         Args:
             cipher (str): The cipher to be decrypted
-            decode_unicode (bool): Whether the cipher should have unicode characters converted to ascii before decrypting. Defautls to ``True``
+            decode_unicode (bool): Whether the cipher should have unicode characters converted to ascii before decrypting. Defaults to ``True``
             key (int|None): The key used to decrypt. Defaults to ``None``, which uses the value from ``self.key``
 
         Examples:
@@ -256,7 +256,7 @@ class Caesar:
 
         Args:
             cipher (str): The cipher to be decrypted
-            decode_unicode (bool): Whether the cipher should have unicode characters converted to ascii before decrypting. Defautls to ``True``
+            decode_unicode (bool): Whether the cipher should have unicode characters converted to ascii before decrypting. Defaults to ``True``
             output_file (str|None): The filename of the file the results are gonna be printed. Defaults to ``None``, which indicated printing on stdout
 
         Examples:
@@ -529,3 +529,148 @@ class RailFence:
                 out.write(results.strip())
         else:
             print(results.strip())
+
+class Keyword:
+    """
+    `Keyword` represents a Keyword Cipher manipulator
+
+    Args:
+        key (str): The keyword to encrypt/decrypt
+    """
+
+    def __init__(self, key):
+        self.abc = string.ascii_uppercase
+        self.key = key
+
+    @property
+    def key(self):
+        return self._key
+
+    @key.setter
+    def key(self, value):
+        value = unidecode(value).upper()
+        self._key = ''
+        for letter in value:
+            if letter not in self._key:
+                self._key += letter
+        key_abc = value + ''.join(letter for letter in self.abc if letter not in self._key)
+        self._abc_to_key = dict(zip(self.abc, key_abc))
+        self._key_to_abc = dict(zip(key_abc, self.abc))
+
+    def encrypt(self, text):
+        """
+        Returns encrypted text (str)
+
+        Args:
+            text (str): Text to be encrypted
+
+        Examples:
+            >>> from crypyto.ciphers import Keyword
+            >>> kw = Keyword('secret')
+            >>> kw.encrypt('Hello, world!')
+            'BEHHK, VKNHR!'
+        """
+
+        text = unidecode(text).upper()
+        cipher = ''.join(self._abc_to_key.get(char, char) for char in text)
+        return cipher
+
+    def decrypt(self, cipher):
+        """
+        Returns decrypted cipher (str)
+
+        Args:
+            cipher (str): Cipher to be decrypted
+
+        Examples:
+            >>> from crypyto.ciphers import Keyword
+            >>> kw = Keyword('secret')
+            >>> kw.decrypt('BEHHK, VKNHR!')
+            'HELLO, WORLD!'
+        """
+
+        cipher = cipher.upper()
+        text = ''.join(self._key_to_abc.get(char, char) for char in cipher)
+        return text
+
+class Vigenere:
+    """
+    `Vigenere` represents a Vigenère Cipher manipulator
+
+    Args:
+        key (str): The key to encode/decode
+        abc (str): The alphabet to generate the Tabula Recta. Defauts to ``string.ascii.uppercase``
+    """
+
+    def __init__(self, key, abc=string.ascii_uppercase):
+        self.key = key
+        self.abc = abc
+
+    @property
+    def key(self):
+        return self._key
+    
+    @key.setter
+    def key(self, value):
+        self._key = value.upper()
+
+    @property
+    def abc(self):
+        return self._abc
+    
+    @abc.setter
+    def abc(self, value):
+        self._abc = value.upper()
+        self._not_abc_pattern = re.compile('[^{}]+'.format(self._abc), re.UNICODE)
+        caesar = Caesar(self._abc)
+        self._tabula_recta = {letter:caesar.encrypt(self._abc, key=self._abc.index(letter)) for letter in self._abc}
+
+    def _encrypt(self, text, decode_unicode=True, decrypt=False):
+        text = unidecode(text).upper() if decode_unicode else text.upper()
+        text_only_abc = self._not_abc_pattern.sub('', text)
+        rpt_times, extra_letters = divmod(len(text_only_abc), len(self.key))
+        key = self.key * rpt_times + self.key[:extra_letters]
+        abc_index = 0
+        cipher = ''
+        for char in text:
+            if char in self.abc:
+                to_add = self.abc[self._tabula_recta[key[abc_index]].index(char)] if decrypt else self._tabula_recta[key[abc_index]][self.abc.index(char)]
+                cipher += to_add
+                abc_index += 1
+            else:
+                cipher += char
+        return cipher
+
+    def encrypt(self, text, decode_unicode=True):
+        """
+        Returns encrypted text (str)
+
+        Args:
+            text (str): Text to be encrypted
+            decode_unicode (bool): Whether the text should have unicode characters converted to ascii before encrypting. Defaults to ``True``
+        
+        Examples:
+            >>> from crypyto.ciphers import Vigenere
+            >>> v = Vigenere('secret')
+            >>> v.encrypt('Hello, world!')
+            'ZINCS, PGVNU!'
+        """
+
+        return self._encrypt(cipher, decode_unicode, False)
+
+    def decrypt(self, cipher, decode_unicode=True):
+        """
+        Returns the decrypted cipher
+
+        Args:
+            cipher (str): Cipher to be decrypted
+            decode_unicode (bool): Whether the text should have unicode characters converted to ascii before encrypting. Defaults to ``True``
+        
+        Examples:
+            >>> from crypyto.ciphers import Vigenere
+            >>> v = Vigenere('secret')
+            >>> v.decrypt('ZINCS, PGVNU!')
+            'HELLO, WORLD!'
+        """
+
+        return self._encrypt(cipher, decode_unicode, True)

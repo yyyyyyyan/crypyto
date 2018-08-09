@@ -11,6 +11,8 @@ Ciphers **crypyto** supports:
 * :ref:`rot13-cipher`
 * :ref:`affine-cipher`
 * :ref:`rail-fence-cipher`
+* :ref:`keyword-cipher`
+* :ref:`vigenere-cipher`
 
 .. _polybius-square-cipher:
 
@@ -63,9 +65,25 @@ Ciphers **crypyto** supports:
    .. autoclass:: RailFence
       :members:
 
+.. _keyword-cipher:
+
+`Keyword Cipher`_
+~~~~~~~~~~~~~~~~~
+   .. autoclass:: Keyword
+      :members:
+
+.. _vigenere-cipher:
+
+`Vigenère Cipher`_
+~~~~~~~~~~~~~~~~~~
+   .. autoclass:: Vigenere
+      :members:
+
 .. _Polybius Square: https://en.wikipedia.org/wiki/Polybius_square
 .. _Atbash: https://en.wikipedia.org/wiki/Atbash
 .. _Caesar Cipher: https://en.wikipedia.org/wiki/Caesar_cipher
 .. _ROT13: https://en.wikipedia.org/wiki/ROT13
 .. _Affine Cipher: https://en.wikipedia.org/wiki/Affine_cipher
 .. _Rail Fence Cipher: https://en.wikipedia.org/wiki/Rail_fence_cipher
+.. _Keyword Cipher: https://en.wikipedia.org/wiki/Keyword_cipher
+.. _Vigenère Cipher: https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher

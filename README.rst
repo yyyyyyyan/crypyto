@@ -47,10 +47,11 @@ Ciphers crypyto supports:
 -  `ROT13`_
 -  `Affine Cipher`_
 -  `Rail Fence Cipher`_
+-  `Keyword Cipher`_
+-  `Vigenère Cipher`_
 
 TODO Ciphers:
 
--  KEYWORD
 -  BEAUFORT
 -  PORTA
 -  VIGENERE
@@ -68,12 +69,12 @@ TODO Ciphers:
 
 Substitution Alphabets crypyto supports:
 
--  `Morse Code`_ 
+-  `Morse Code`_
+-  `Pigpen Cipher`_
 -  `Templar Cipher`_
 
 TODO Substitution Alphabets:
 
--  Pigpen
 -  ASL
 -  BSL
 -  Maze
@@ -112,7 +113,10 @@ for details
 .. _ROT13: https://en.wikipedia.org/wiki/ROT13
 .. _Affine Cipher: https://en.wikipedia.org/wiki/Affine_cipher
 .. _Rail Fence Cipher: https://en.wikipedia.org/wiki/Rail_fence_cipher
+.. _Keyword Cipher: https://en.wikipedia.org/wiki/Keyword_cipher
+.. _Vigenère Cipher: https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher
 .. _Morse Code: https://en.wikipedia.org/wiki/Morse_code
+.. _Pigpen Cipher: https://en.wikipedia.org/wiki/Pigpen_cipher
 .. _Templar Cipher: https://en.wikipedia.org/wiki/Pigpen_cipher#Variants
 .. _yanorestes: https://github.com/yanorestes
 .. _LICENSE: https://github.com/yanorestes/crypyto/blob/master/LICENSE.txt
