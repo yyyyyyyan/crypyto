@@ -73,7 +73,9 @@ Alphabets **crypyto** supports:
 
       Encrypted hello world (5 letters per line)
 
-   .. figure: https://raw.githubusercontent.com/yanorestes/crypyto/master/image_examples/betamaze_hello_random.png
+   **betamaze_hello_random.png**:
+
+   .. figure:: https://raw.githubusercontent.com/yanorestes/crypyto/master/image_examples/betamaze_hello_random.png
       :alt: Encrypted hello world (5 letters per line and with random rotation)
 
       Encrypted hello world (5 letters per line and with random rotation)
