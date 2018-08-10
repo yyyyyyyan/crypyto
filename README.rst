@@ -71,12 +71,12 @@ Substitution Alphabets crypyto supports:
 -  `Morse Code`_
 -  `Pigpen Cipher`_
 -  `Templar Cipher`_
+-  `Betamaze Alphabet`_
 
 TODO Substitution Alphabets:
 
 -  ASL
 -  BSL
--  Maze
 -  Flag semaphore
 -  Binary
 -  Hexadecimal
@@ -117,5 +117,6 @@ for details
 .. _Morse Code: https://en.wikipedia.org/wiki/Morse_code
 .. _Pigpen Cipher: https://en.wikipedia.org/wiki/Pigpen_cipher
 .. _Templar Cipher: https://en.wikipedia.org/wiki/Pigpen_cipher#Variants
+.. _Betamaze Alphabet: https://www.omniglot.com/conscripts/betamaze.htm
 .. _yanorestes: https://github.com/yanorestes
 .. _LICENSE: https://github.com/yanorestes/crypyto/blob/master/LICENSE.txt

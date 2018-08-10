@@ -18,7 +18,7 @@ with open('README.rst') as file:
 
 setup(
     name='crypyto',
-    version='0.2.5',
+    version='0.3.0',
     author='Yan Orestes',
     author_email='yan.orestes@alura.com.br',
     packages=['crypyto'],
@@ -27,7 +27,7 @@ setup(
     description='crypyto is a Python package that provides simple usage of cryptography tools and ciphers on your programs.',
     long_description=long_description,
     url='https://github.com/yanorestes/crypyto',
-    download_url='https://github.com/yanorestes/crypyto/archive/0.2.5.zip',
+    download_url='https://github.com/yanorestes/crypyto/archive/0.3.0.zip',
     license='MIT',
     keywords='crypto cryptography cipher',
     classifiers=[
