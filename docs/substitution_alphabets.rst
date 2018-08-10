@@ -6,7 +6,6 @@ Substitution Alphabets
 Alphabets **crypyto** supports:
 
 * :ref:`morse-code`
-* :ref:`image-substitution`
 * :ref:`pigpen-cipher`
 * :ref:`templar-cipher`
 
@@ -17,26 +16,12 @@ Alphabets **crypyto** supports:
    .. autoclass:: Morse
       :members:
 
-.. _image-substitution:
-
-Image Substitution
-~~~~~~~~~~~~~~~~~~
-   .. autoclass:: ImageSubstitution
-      :members:
-
 .. _pigpen-cipher:
 
 `Pigpen Cipher`_
 ~~~~~~~~~~~~~~~~
-   `Pigpen` represents an ``ImageSubstitution`` object adjusted to the Pigpen Cipher
-
-   Examples:
-
-   .. code:: python
-
-      >>> from crypyto.substitution_alphabets import Pigpen
-      >>> Templar.encrypt('Hello, world!', 'pigpen_hello.png')
-      >>> Templar.encrypt('Hello, world!', 'pigpen_hello_max.png', 5)
+   .. autoclass:: Pigpen
+      :members:
 
    **pigpen_hello.png**:
 
@@ -56,15 +41,8 @@ Image Substitution
 
 `Templar Cipher`_
 ~~~~~~~~~~~~~~~~~
-   `Templar` represents an ``ImageSubstitution`` object adjusted to the Templar Cipher
-
-   Examples:
-
-   .. code:: python
-
-      >>> from crypyto.substitution_alphabets import Templar
-      >>> Templar.encrypt('Hello, world!', 'templar_hello.png')
-      >>> Templar.encrypt('Hello, world!', 'templar_hello_max.png', 5)
+   .. autoclass:: Templar
+      :members:
 
    **templar_hello.png**:
 

@@ -1,7 +1,7 @@
 `crypyto`_
 ==========
 
-crypyto [*kri*-**pahy**-*toh*] is a Python package that provides simple
+crypyto [**kri**-*pahy*-*toh*] is a Python package that provides simple
 usage of cryptography tools and ciphers on your programs.
 
 Check the `complete docs`_!
@@ -54,7 +54,6 @@ TODO Ciphers:
 
 -  BEAUFORT
 -  PORTA
--  VIGENERE
 -  GRONSFELD
 -  AUTOKEY
 -  BACON

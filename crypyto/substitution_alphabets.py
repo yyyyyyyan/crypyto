@@ -117,15 +117,6 @@ class Morse:
         return text.strip()
 
 class ImageSubstitution:
-    """
-    `ImageSubstitution` is a base class which is used by all the image-based alphabets
-
-    Args:
-        abc (str): The plain text alphabet this image-based alphabet have a translation to
-        directory (str): The directory where the image files are located (inside this package -> ``/static/directory/``)
-        extension (str): The file extension the image files use
-    """
-
     def __init__(self, abc, directory, extension):
         self.abc = abc.upper()
         self.not_abc_pattern = re.compile('[^{}]+'.format(abc), re.UNICODE)
@@ -133,15 +124,6 @@ class ImageSubstitution:
         self.filename = '{}/static/{}/'.format(base_dir, directory) + '{}' + '.{}'.format(extension)
 
     def encrypt(self, text, filename='output.png', max_in_line=30):
-        """
-        Creates an image file with the translated text
-
-        Args:
-            text (str): Text to be translated to the specified substitution alphabet
-            filename (str): The filename of the image file with the translated text. Defaults to ``'output.png'``
-            max_in_line (int): The max number of letters per line. Defaults to ``30``
-        """
-
         text = unidecode(text).upper()
         text = self.not_abc_pattern.sub('', text)
         abc_to_img = {letter:Image.open(self.filename.format(letter)) for letter in set(text)}
@@ -161,5 +143,54 @@ class ImageSubstitution:
             x_offset = 0 if x_offset + abc_to_img[letter].size[0] >= total_width else x_offset + abc_to_img[letter].size[0]
         new_img.save(filename)
 
-Templar = ImageSubstitution(string.ascii_uppercase, 'Templar', 'png')
-Pigpen = ImageSubstitution(string.ascii_uppercase, 'Pigpen', 'png')
+class Pigpen(ImageSubstitution):
+    """
+    `Pigpen` represents a Pigpen Cipher manipulator
+    """
+
+    def __init__(self):
+        super().__init__(string.ascii_uppercase, 'Pigpen', 'png')
+
+    def encrypt(self, text, filename='output.png', max_in_line=30):
+        """
+        Creates an image file with the translated text
+
+        Args:
+            text (str): Text to be translated to the specified substitution alphabet
+            filename (str): The filename of the image file with the translated text. Defaults to ``'output.png'``
+            max_in_line (int): The max number of letters per line. Defaults to ``30``
+
+        Examples:
+            >>> from crypyto.substitution_alphabets import Pigpen
+            >>> pigpen = Pigpen()
+            >>> pigpen.encrypt('Hello, world!', 'pigpen_hello.png')
+            >>> pigpen.encrypt('Hello, world!', 'pigpen_hello_max.png', 5)
+        """
+
+        super().encrypt(text, filename, max_in_line)
+
+class Templar(ImageSubstitution):
+    """
+    `Templar` represents a Templar Cipher manipulator
+    """
+
+    def __init__(self):
+        super().__init__(string.ascii_uppercase, 'Templar', 'png')
+
+    def encrypt(self, text, filename='output.png', max_in_line=30):
+        """
+        Creates an image file with the translated text
+
+        Args:
+            text (str): Text to be translated to the specified substitution alphabet
+            filename (str): The filename of the image file with the translated text. Defaults to ``'output.png'``
+            max_in_line (int): The max number of letters per line. Defaults to ``30``
+        
+        Examples:
+            >>> from crypyto.substitution_alphabets import Templar
+            >>> templar = Templar()
+            >>> templar.encrypt('Hello, world!', 'templar_hello.png')
+            >>> templar.encrypt('Hello, world!', 'templar_hello_max.png', 5)
+        """
+
+        super().encrypt(text, filename, max_in_line)
