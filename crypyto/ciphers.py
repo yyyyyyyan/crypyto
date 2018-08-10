@@ -536,10 +536,11 @@ class Keyword:
 
     Args:
         key (str): The keyword to encrypt/decrypt
+        abc (str): The alphabet used in the cipher. Defaults to ``string.ascii_uppercase``
     """
 
-    def __init__(self, key):
-        self.abc = string.ascii_uppercase
+    def __init__(self, key, abc=string.ascii_uppercase):
+        self.abc = abc.upper()
         self.key = key
 
     @property
@@ -553,7 +554,7 @@ class Keyword:
         for letter in value:
             if letter not in self._key:
                 self._key += letter
-        key_abc = value + ''.join(letter for letter in self.abc if letter not in self._key)
+        key_abc = self._key + ''.join(letter for letter in self.abc if letter not in self._key)
         self._abc_to_key = dict(zip(self.abc, key_abc))
         self._key_to_abc = dict(zip(key_abc, self.abc))
 
@@ -656,7 +657,7 @@ class Vigenere:
             'ZINCS, PGVNU!'
         """
 
-        return self._encrypt(cipher, decode_unicode, False)
+        return self._encrypt(text, decode_unicode, False)
 
     def decrypt(self, cipher, decode_unicode=True):
         """

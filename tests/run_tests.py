@@ -8,7 +8,9 @@ ciphers = {
 	'tests/Caesar.out':Caesar(key=7),
 	'tests/Affine.out':Affine(5, 8),
 	'tests/RailFence.out':RailFence(3),
-	'tests/Morse.out':Morse()
+	'tests/Morse.out':Morse(),
+	'tests/Keyword.out':Keyword('secret'),
+	'tests/Vigenere.out':Vigenere('secret'),
 	}
 
 with open('tests/input.in', 'r') as input_file:
