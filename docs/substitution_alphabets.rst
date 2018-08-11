@@ -6,6 +6,7 @@ Substitution Alphabets
 Alphabets **crypyto** supports:
 
 * :ref:`morse-code`
+* :ref:`binary-translation`
 * :ref:`pigpen-cipher`
 * :ref:`templar-cipher`
 * :ref:`betamaze-alphabet`
@@ -15,6 +16,13 @@ Alphabets **crypyto** supports:
 `Morse Code`_
 ~~~~~~~~~~~~~
    .. autoclass:: Morse
+      :members:
+
+.. _binary-translation:
+
+`Binary Translation`_
+~~~~~~~~~~~~~~~~~~~~~
+   .. autoclass:: Binary
       :members:
 
 .. _pigpen-cipher:
@@ -81,6 +89,7 @@ Alphabets **crypyto** supports:
       Encrypted hello world (5 letters per line and with random rotation)
 
 .. _Morse Code: https://en.wikipedia.org/wiki/Morse_code
+.. _Binary Translation: https://en.wikipedia.org/wiki/Binary-to-text_encoding
 .. _Pigpen Cipher: https://en.wikipedia.org/wiki/Pigpen_cipher
 .. _Templar Cipher: https://en.wikipedia.org/wiki/Pigpen_cipher#Variants
 .. _Betamaze Alphabet: https://www.omniglot.com/conscripts/betamaze.htm

@@ -117,6 +117,49 @@ class Morse:
             text += ' '
         return text.strip()
 
+class Binary:
+    """
+    `Binary` represents a text-to-binary manipulator
+
+    Args:
+        letter_splitter (str): A string which will be used to indicate characters separation. Defaults to ``' '``
+    """
+
+    def __init__(self, letter_splitter=' '):
+        self.letter_splitter = letter_splitter
+
+    def encrypt(self, text):
+        """
+        Returns the text translated to binary
+
+        Args:
+            text (str): The text to be translated to binary
+
+        Examples:
+            >>> from crypyto.substitution_alphabets import Binary
+            >>> b = Binary()
+            >>> b.encrypt('Hello, world!')
+            '1001000 1100101 1101100 1101100 1101111 101100 100000 1110111 1101111 1110010 1101100 1100100 100001'
+        """
+
+        return self.letter_splitter.join(format(ord(char), 'b') for char in text)
+
+    def decrypt(self, cipher):
+        """
+        Returns the binary-cipher translated to text
+
+        Args:
+            cipher (str): The binary-cipher to be translated to normal text
+
+        Examples:
+            >>> from crypyto.substitution_alphabets import Binary
+            >>> b = Binary()
+            >>> b.decrypt('1001000 1100101 1101100 1101100 1101111 101100 100000 1110111 1101111 1110010 1101100 1100100 100001')
+            'Hello, world!'
+        """
+
+        return ''.join(chr(int(char, 2)) for char in cipher.split(self.letter_splitter))      
+
 class ImageSubstitution:
     def __init__(self, abc, directory, extension):
         self.abc = abc.upper()

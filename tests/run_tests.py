@@ -11,6 +11,7 @@ ciphers = {
 	'tests/Morse.out':Morse(),
 	'tests/Keyword.out':Keyword('secret'),
 	'tests/Vigenere.out':Vigenere('secret'),
+	'tests/Binary.out':Binary(),
 	}
 
 with open('tests/input.in', 'r') as input_file:

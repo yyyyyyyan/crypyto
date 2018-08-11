@@ -69,6 +69,7 @@ TODO Ciphers:
 Substitution Alphabets crypyto supports:
 
 -  `Morse Code`_
+-  `Binary to Text`_
 -  `Pigpen Cipher`_
 -  `Templar Cipher`_
 -  `Betamaze Alphabet`_
@@ -78,7 +79,6 @@ TODO Substitution Alphabets:
 -  ASL
 -  BSL
 -  Flag semaphore
--  Binary
 -  Hexadecimal
 -  Octal
 -  L33TSP34K
@@ -115,6 +115,7 @@ for details
 .. _Keyword Cipher: https://en.wikipedia.org/wiki/Keyword_cipher
 .. _Vigenère Cipher: https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher
 .. _Morse Code: https://en.wikipedia.org/wiki/Morse_code
+.. _Binary to Text: https://en.wikipedia.org/wiki/Binary-to-text_encoding
 .. _Pigpen Cipher: https://en.wikipedia.org/wiki/Pigpen_cipher
 .. _Templar Cipher: https://en.wikipedia.org/wiki/Pigpen_cipher#Variants
 .. _Betamaze Alphabet: https://www.omniglot.com/conscripts/betamaze.htm
