@@ -5,7 +5,7 @@ import os
 import re
 import string
 import random
-from math import ceil
+from math import ceil, sqrt
 from unidecode import unidecode
 from PIL import Image
 
@@ -166,30 +166,57 @@ class ImageSubstitution:
         self.not_abc_pattern = re.compile('[^{}]+'.format(re.escape(abc)), re.UNICODE)
         base_dir = os.path.dirname(os.path.realpath(__file__))
         self.filename = '{}/static/{}/'.format(base_dir, directory) + '{}' + '.{}'.format(extension)
+        self.abc_to_img = self._get_abc_to_img()
 
-    def _get_abc_to_img(self, text):
-        abc_to_img = {letter:Image.open(self.filename.format(letter)) for letter in set(text)}
+    def _get_abc_to_img(self):
+        abc_to_img = {letter:Image.open(self.filename.format(letter)) for letter in self.abc}
         return abc_to_img
 
     def _encrypt(self, text, filename='output.png', max_in_line=30):
         text = unidecode(text).upper()
         text = self.not_abc_pattern.sub('', text)
-        abc_to_img = self._get_abc_to_img(text)
-        max_height = max(abc_to_img[letter].size[1] for letter in text)
+        max_height = max(self.abc_to_img[letter].size[1] for letter in text)
         if len(text) > max_in_line:
-            total_width = sum(abc_to_img[letter].size[0] for letter in text[:max_in_line])
+            total_width = sum(self.abc_to_img[letter].size[0] for letter in text[:max_in_line])
             max_height *= ceil(len(text) / max_in_line)
         else:
-            total_width = sum(abc_to_img[letter].size[0] for letter in text)
+            total_width = sum(self.abc_to_img[letter].size[0] for letter in text)
 
         new_img = Image.new('RGB', (total_width, max_height), (255, 255, 255))
         x_offset = 0
         y_offset = 0
         for letter in text:
-            new_img.paste(abc_to_img[letter], (x_offset, y_offset), mask=abc_to_img[letter])
-            y_offset = y_offset + abc_to_img[letter].size[1] if x_offset + abc_to_img[letter].size[0] >= total_width else y_offset
-            x_offset = 0 if x_offset + abc_to_img[letter].size[0] >= total_width else x_offset + abc_to_img[letter].size[0]
+            new_img.paste(self.abc_to_img[letter], (x_offset, y_offset))
+            y_offset = y_offset + self.abc_to_img[letter].size[1] if x_offset + self.abc_to_img[letter].size[0] >= total_width else y_offset
+            x_offset = 0 if x_offset + self.abc_to_img[letter].size[0] >= total_width else x_offset + self.abc_to_img[letter].size[0]
         new_img.save(filename)
+
+    def _get_rms(self, h1, h2):
+        h1 = h1.histogram()
+        h2 = h2.histogram()
+        diff_squares = [(h1[i] - h2[i]) ** 2 for i in range(len(h1))]
+        rms = sqrt(sum(diff_squares) / len(h1))
+        return rms
+
+    def _decrypt(self, filename):
+        cipher = Image.open(filename)
+        base_width, base_height = self.abc_to_img[self.abc[0]].size
+        if cipher.size[0] % base_width > 0 or cipher.size[1] % base_height > 0:
+            raise ValueError('Encrypted image is not properly sized')
+        n_letters_p_line = cipher.size[0] // base_width
+        n_lines = cipher.size[1] // base_height
+        text = ''
+        y_offset = 0
+        for line in range(n_lines):
+            x_offset = 0
+            for letter in range(n_letters_p_line):
+                cropped_letter = cipher.crop((x_offset, y_offset, x_offset + base_width, y_offset + base_height))
+                all_rms = {l:self._get_rms(i, cropped_letter) for l,i in self.abc_to_img.items()}
+                letter = min(all_rms, key=lambda k: all_rms[k])
+                text += letter
+                x_offset += base_width
+            y_offset += base_height
+        return text
 
 class Pigpen(ImageSubstitution):
     """
@@ -217,6 +244,12 @@ class Pigpen(ImageSubstitution):
 
         super()._encrypt(text, filename, max_in_line)
 
+    def decrypt(self, filename):
+        """
+        todo
+        """
+        super()._decrypt(filename)
+
 class Templar(ImageSubstitution):
     """
     `Templar` represents a Templar Cipher manipulator
@@ -243,6 +276,12 @@ class Templar(ImageSubstitution):
 
         super()._encrypt(text, filename, max_in_line)
 
+    def decrypt(self, filename):
+        """
+        todo
+        """
+        super()._decrypt(filename)
+
 class Betamaze(ImageSubstitution):
     """
     `Betamaze` represents a Betamaze Alphabet Manipulator
@@ -252,17 +291,26 @@ class Betamaze(ImageSubstitution):
     """
 
     def __init__(self, random_rotate=False):
-        self.random_rotate = random_rotate
+        self._random_rotate = True if random_rotate else False
         self._symbols_dict = {',':'comma', '.':'period', ' ':'space', '(':'parenthesis', ')':'parenthesis', ':':'colon', ';':'semicolon', '"':'quote'}
         abc = string.ascii_uppercase + ' ,.:;"()0123456789'
         super().__init__(abc, 'Betamaze', 'png')
 
-    def _get_abc_to_img(self, text):
+    @property
+    def random_rotate(self):
+        return self._random_rotate
+
+    @random_rotate.setter
+    def random_rotate(self, value):
+        self._random_rotate = True if value else False
+        self.abc_to_img = self._get_abc_to_img()
+
+    def _get_abc_to_img(self):
         symbols_dict = {'.'}
         if self.random_rotate:
-            abc_to_img = {char:Image.open(self.filename.format(self._symbols_dict.get(char, char))).rotate(90 * random.randint(0,3)) for char in set(text)}
+            abc_to_img = {char:Image.open(self.filename.format(self._symbols_dict.get(char, char))).rotate(90 * random.randint(0,3)) for char in self.abc}
         else:
-            abc_to_img = {char:Image.open(self.filename.format(self._symbols_dict.get(char, char))) for char in set(text)}
+            abc_to_img = {char:Image.open(self.filename.format(self._symbols_dict.get(char, char))) for char in self.abc}
         return abc_to_img
 
     def encrypt(self, text, filename='output.png', max_in_line=10):
@@ -284,3 +332,9 @@ class Betamaze(ImageSubstitution):
         """
 
         super()._encrypt(text, filename, max_in_line)
+
+    def decrypt(self, filename):
+        """
+        todo
+        """
+        super()._decrypt(filename)
