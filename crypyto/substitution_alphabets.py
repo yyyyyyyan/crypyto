@@ -167,6 +167,7 @@ class ImageSubstitution:
         base_dir = os.path.dirname(os.path.realpath(__file__))
         self.filename = '{}/static/{}/'.format(base_dir, directory) + '{}' + '.{}'.format(extension)
         self.abc_to_img = self._get_abc_to_img()
+        self.abc_to_img[''] = Image.open(self.filename.format('blank'))
 
     def _get_abc_to_img(self):
         abc_to_img = {letter:Image.open(self.filename.format(letter)) for letter in self.abc}
@@ -246,9 +247,24 @@ class Pigpen(ImageSubstitution):
 
     def decrypt(self, filename):
         """
-        todo
+        Returns the image cipher translated to normal text (str). It will most often do it wrong, because of specifications on Pigpen. I'll try to fix that soon.
+
+        Args:
+            filename (str): Filename of the cipher image file
+
+        Raise:
+            ValueError: If the size of the respective image doensn't match the cipher pattern. I'll try to work on that.
+
+        Examples:
+            >>> from crypyto.substitution_alphabets import Pigpen
+            >>> pigpgen = Pigpen()
+            >>> pigpen.decrypt('pigpen_hello.png')
+            'BEJJMWMJJD'
+            >>> pigpen.decrypt('pigpen_hello_max.png')
+            'BEJJMWMJJD'
         """
-        super()._decrypt(filename)
+
+        return super()._decrypt(filename)
 
 class Templar(ImageSubstitution):
     """
@@ -278,9 +294,24 @@ class Templar(ImageSubstitution):
 
     def decrypt(self, filename):
         """
-        todo
+        Returns the image cipher translated to normal text (str)
+
+        Args:
+            filename (str): Filename of the cipher image file
+
+        Raise:
+            ValueError: If the size of the respective image doensn't match the cipher pattern. I'll try to work on that.
+
+        Examples:
+            >>> from crypyto.substitution_alphabets import Templar
+            >>> templar = Templar()
+            >>> templar.decrypt('templar_hello.png')
+            'HELLOWORLD'
+            >>> templar.decrypt('templar_hello_max.png')
+            'HELLOWORLD'
         """
-        super()._decrypt(filename)
+        
+        return super()._decrypt(filename)
 
 class Betamaze(ImageSubstitution):
     """
@@ -304,6 +335,7 @@ class Betamaze(ImageSubstitution):
     def random_rotate(self, value):
         self._random_rotate = True if value else False
         self.abc_to_img = self._get_abc_to_img()
+        self.abc_to_img[''] = Image.open(self.filename.format('blank'))
 
     def _get_abc_to_img(self):
         symbols_dict = {'.'}
@@ -335,6 +367,21 @@ class Betamaze(ImageSubstitution):
 
     def decrypt(self, filename):
         """
-        todo
+        Returns the image cipher translated to normal text (str)
+
+        Args:
+            filename (str): Filename of the cipher image file
+
+        Raise:
+            ValueError: If the size of the respective image doensn't match the cipher pattern. I'll try to work on that.
+
+        Examples:
+            >>> from crypyto.substitution_alphabets import Betamaze
+            >>> betamaze = Betamaze()
+            >>> betamaze.decrypt('betamaze_hello.png')
+            'HELLO, WORLD'
+            >>> betamaze.decrypt('betamaze_hello_random.png')
+            'HELLO, WORLD'
         """
-        super()._decrypt(filename)
+
+        return super()._decrypt(filename)
