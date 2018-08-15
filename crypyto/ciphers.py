@@ -214,7 +214,7 @@ class Caesar:
             'MJQQT, BTWQI!'
         """
 
-        key = key if key else self.key
+        key = self.key if key == None else key
         text = unidecode(text).upper() if decode_unicode else text.upper()
         cipher = ''
         for letter in text:
