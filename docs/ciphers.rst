@@ -13,6 +13,7 @@ Ciphers **crypyto** supports:
 * :ref:`rail-fence-cipher`
 * :ref:`keyword-cipher`
 * :ref:`vigenere-cipher`
+* :ref:`beaufort-cipher`
 
 .. _polybius-square-cipher:
 
@@ -79,6 +80,13 @@ Ciphers **crypyto** supports:
    .. autoclass:: Vigenere
       :members:
 
+.. _beaufort-cipher:
+
+`Beaufort Cipher`_
+~~~~~~~~~~~~~~~~~~
+   .. autoclass:: Beaufort
+      :members:
+
 .. _Polybius Square: https://en.wikipedia.org/wiki/Polybius_square
 .. _Atbash: https://en.wikipedia.org/wiki/Atbash
 .. _Caesar Cipher: https://en.wikipedia.org/wiki/Caesar_cipher
@@ -87,3 +95,4 @@ Ciphers **crypyto** supports:
 .. _Rail Fence Cipher: https://en.wikipedia.org/wiki/Rail_fence_cipher
 .. _Keyword Cipher: https://en.wikipedia.org/wiki/Keyword_cipher
 .. _Vigenère Cipher: https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher
+.. _Beaufort Cipher: https://en.wikipedia.org/wiki/Beaufort_cipher

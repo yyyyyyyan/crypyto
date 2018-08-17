@@ -600,12 +600,14 @@ class Vigenere:
 
     Args:
         key (str): The key to encode/decode
-        abc (str): The alphabet to generate the Tabula Recta. Defauts to ``string.ascii.uppercase``
+        abc (str): The alphabet the cipher will be based upon. Defauts to ``string.ascii.uppercase``
+        decode_unicode_key (bool): Whether the key should have unicode characters converted to ascii. Defaults to ``True``
     """
 
-    def __init__(self, key, abc=string.ascii_uppercase):
-        self.key = key
+    def __init__(self, key, abc=string.ascii_uppercase, decode_unicode_key=True):
         self.abc = abc
+        self._decode_unicode_key = decode_unicode_key
+        self.key = key
 
     @property
     def key(self):
@@ -613,7 +615,8 @@ class Vigenere:
     
     @key.setter
     def key(self, value):
-        self._key = value.upper()
+        value = unidecode(value.upper()) if self._decode_unicode_key else value.upper()
+        self._key = self._not_abc_pattern.sub('', value)
 
     @property
     def abc(self):
@@ -623,20 +626,24 @@ class Vigenere:
     def abc(self, value):
         self._abc = value.upper()
         self._not_abc_pattern = re.compile('[^{}]+'.format(self._abc), re.UNICODE)
-        caesar = Caesar(self._abc)
-        self._tabula_recta = {letter:caesar.encrypt(self._abc, key=self._abc.index(letter)) for letter in self._abc}
 
-    def _encrypt(self, text, decode_unicode=True, decrypt=False):
+    def _prepare_encryption(self, text, decode_unicode):
         text = unidecode(text).upper() if decode_unicode else text.upper()
         text_only_abc = self._not_abc_pattern.sub('', text)
         rpt_times, extra_letters = divmod(len(text_only_abc), len(self.key))
         key = self.key * rpt_times + self.key[:extra_letters]
+        return text, key
+
+    def _encrypt(self, text, decode_unicode=True, decrypt=False):
+        text, key = self._prepare_encryption(text, decode_unicode)
         abc_index = 0
         cipher = ''
         for char in text:
             if char in self.abc:
-                to_add = self.abc[self._tabula_recta[key[abc_index]].index(char)] if decrypt else self._tabula_recta[key[abc_index]][self.abc.index(char)]
-                cipher += to_add
+                mul_factor = -1 if decrypt else 1
+                cipher_index = self.abc.index(char) + mul_factor * self.abc.index(key[abc_index])
+                cipher_index = cipher_index + 26 if cipher_index < 0 else cipher_index % 26
+                cipher += self.abc[cipher_index]
                 abc_index += 1
             else:
                 cipher += char
@@ -661,11 +668,11 @@ class Vigenere:
 
     def decrypt(self, cipher, decode_unicode=True):
         """
-        Returns the decrypted cipher
+        Returns decrypted cipher
 
         Args:
             cipher (str): Cipher to be decrypted
-            decode_unicode (bool): Whether the text should have unicode characters converted to ascii before encrypting. Defaults to ``True``
+            decode_unicode (bool): Whether the cipher should have unicode characters converted to ascii before decrypting. Defaults to ``True``
         
         Examples:
             >>> from crypyto.ciphers import Vigenere
@@ -675,3 +682,60 @@ class Vigenere:
         """
 
         return self._encrypt(cipher, decode_unicode, True)
+
+class Beaufort(Vigenere):
+    """
+    `Beaufort` represents a Beaufort Cipher manipulator
+
+    Args:
+        key (str): The key to encode/decode
+        abc (str): The alphabet the cipher will be based upon. Defauts to ``string.ascii.uppercase``
+        decode_unicode_key (bool): Whether the key should have unicode characters converted to ascii. Defaults to ``True``
+    """
+
+    def __init__(self, key, abc=string.ascii_uppercase, decode_unicode_key=True):
+        self._atbash = Atbash()
+        super().__init__(key, abc, decode_unicode_key)
+
+    @property
+    def key(self):
+        return self._key
+
+    @key.setter
+    def key(self, value):
+        value = unidecode(value.upper()) if self._decode_unicode_key else value.upper()
+        self._key = self._atbash.encrypt(self._not_abc_pattern.sub('', value))
+
+    def encrypt(self, text, decode_unicode=True):
+        """
+        Returns encrypted text (str)
+
+        Args:
+            text (str): The text to be encrypted
+            decode_unicode (bool): Whether the text should have unicode characters converted to ascii before encrypting. Defaults to ``True``
+        
+        Examples:
+            >>> from crypyto.ciphers import Beaufort
+            >>> b = Beaufort('secret')
+            >>> b.encrypt('Hello, world!')
+            'LARGQ, XENRO!'
+        """
+
+        return self._encrypt(self._atbash.encrypt(text), decode_unicode, True)
+
+    def decrypt(self, cipher, decode_unicode=True):
+        """
+        Returns decrypted cipher (str)
+
+        Args:
+            cipher (str): The cipher to be decrypted
+            decode_unicode (bool): Whether the cipher should have unicode characters converted to ascii before decrypting. Defaults to ``True``
+        
+        Examples:
+            >>> from crypyto.ciphers import Beaufort
+            >>> b = Beaufort('secret')
+            >>> b.decrypt('LARGQ, XENRO!')
+            'HELLO, WORLD!'
+        """
+
+        return self.encrypt(cipher, decode_unicode)
