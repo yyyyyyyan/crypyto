@@ -12,6 +12,7 @@ ciphers = {
 	'tests/Keyword.out':Keyword('secret'),
 	'tests/Vigenere.out':Vigenere('secret'),
 	'tests/Binary.out':Binary(),
+	'tests/Beaufort.out':Beaufort('secret'),
 	}
 
 with open('tests/input.in', 'r') as input_file:
