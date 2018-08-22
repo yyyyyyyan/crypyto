@@ -50,6 +50,7 @@ Ciphers crypyto supports:
 -  `Keyword Cipher`_
 -  `Vigenère Cipher`_
 -  `Beaufort Cipher`_
+-  `Gronsfeld Cipher`_
 
 TODO Ciphers:
 
@@ -115,6 +116,7 @@ for details
 .. _Keyword Cipher: https://en.wikipedia.org/wiki/Keyword_cipher
 .. _Vigenère Cipher: https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher
 .. _Beaufort Cipher: https://en.wikipedia.org/wiki/Beaufort_cipher
+.. _Gronsfeld Cipher: https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher#Variants
 .. _Morse Code: https://en.wikipedia.org/wiki/Morse_code
 .. _Binary to Text: https://en.wikipedia.org/wiki/Binary-to-text_encoding
 .. _Pigpen Cipher: https://en.wikipedia.org/wiki/Pigpen_cipher

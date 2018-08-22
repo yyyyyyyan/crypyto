@@ -739,3 +739,83 @@ class Beaufort(Vigenere):
         """
 
         return self.encrypt(cipher, decode_unicode)
+
+class Gronsfeld(Vigenere):
+    """
+    `Gronsfeld` represents a Gronsfeld Cipher manipulator
+
+    Args:
+        key (str): The key to encode/decode. Must contain only numerical characters (0-9)
+        abc (str): The alphabet the cipher will be based upon. Defauts to ``string.ascii.uppercase``
+    """
+
+    def __init__(self, key, abc=string.ascii_uppercase):
+        self.abc = abc
+        self.only_num_pattern = re.compile(r'[^\d]+', re.UNICODE)
+        self.key = key
+
+    @property
+    def abc(self):
+        return self._abc
+    
+    @abc.setter
+    def abc(self, value):
+        self._abc = value.upper()
+        self._not_abc_pattern = re.compile('[^{}]+'.format(self._abc), re.UNICODE)
+        self._caesar = Caesar(value)
+
+    @property
+    def key(self):
+        return self._key
+    
+    @key.setter
+    def key(self, value):
+        self._key = self.only_num_pattern.sub('', value)
+
+    def _encrypt(self, text, decode_unicode=True, decrypt=False):
+        text, key = self._prepare_encryption(text, decode_unicode)
+        abc_index = 0
+        cipher = ''
+        for char in text:
+            if char in self.abc:
+                caesar_key = int(key[abc_index])
+                cipher_char = self._caesar.decrypt(char, key=caesar_key) if decrypt else self._caesar.encrypt(char, key=caesar_key)
+                cipher += cipher_char
+                abc_index += 1
+            else:
+                cipher += char
+        return cipher
+
+    def encrypt(self, text, decode_unicode=True):
+        """
+        Returns encrypted text (str)
+
+        Args:
+            text (str): The text to be encrypted
+            decode_unicode (bool): Whether the text should have unicode characters converted to ascii before encrypting. Defaults to ``True``
+        
+        Examples:
+            >>> from crypyto.ciphers import Gronsfeld
+            >>> g = Gronsfeld('2317')
+            >>> g.encrypt('Hello, world!')
+            'JHMSQ, ZPYNG!'
+        """
+
+        return self._encrypt(text, decode_unicode, False)
+
+    def decrypt(self, cipher, decode_unicode=True):
+        """
+        Returns decrypted cipher (str)
+
+        Args:
+            cipher (str): The cipher to be decrypted
+            decode_unicode (bool): Whether the text should have unicode characters converted to ascii before encrypting. Defaults to ``True``
+        
+        Examples:
+            >>> from crypyto.ciphers import Gronsfeld
+            >>> g = Gronsfeld('2317')
+            >>> g.decrypt('JHMSQ, ZPYNG!')
+            'HELLO, WORLD!'
+        """
+
+        return self._encrypt(cipher, decode_unicode, True)

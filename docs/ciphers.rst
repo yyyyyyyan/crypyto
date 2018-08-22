@@ -14,6 +14,7 @@ Ciphers **crypyto** supports:
 * :ref:`keyword-cipher`
 * :ref:`vigenere-cipher`
 * :ref:`beaufort-cipher`
+* :ref:`gronsfeld-cipher`
 
 .. _polybius-square-cipher:
 
@@ -87,6 +88,13 @@ Ciphers **crypyto** supports:
    .. autoclass:: Beaufort
       :members:
 
+.. _gronsfeld-cipher:
+
+`Gronsfeld Cipher`_
+~~~~~~~~~~~~~~~~~~~
+   .. autoclass:: Gronsfeld
+      :members:
+
 .. _Polybius Square: https://en.wikipedia.org/wiki/Polybius_square
 .. _Atbash: https://en.wikipedia.org/wiki/Atbash
 .. _Caesar Cipher: https://en.wikipedia.org/wiki/Caesar_cipher
@@ -96,3 +104,4 @@ Ciphers **crypyto** supports:
 .. _Keyword Cipher: https://en.wikipedia.org/wiki/Keyword_cipher
 .. _Vigenère Cipher: https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher
 .. _Beaufort Cipher: https://en.wikipedia.org/wiki/Beaufort_cipher
+.. _Gronsfeld Cipher: https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher#Variants
